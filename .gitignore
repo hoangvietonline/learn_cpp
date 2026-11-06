@@ -1,0 +1,48 @@
+# Compiled programs generated beside the current C++ source file
+/lesson4/functions
+
+# Excluded lesson folder
+/animal/
+
+# C/C++ build outputs and debug symbols
+*.o
+*.obj
+*.out
+*.exe
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.pdb
+*.ilk
+*.dSYM/
+
+# Build directories and CMake-generated files
+build/
+bin/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# Local editor settings; keep shared build tasks and extension suggestions
+.vscode/*
+!.vscode/tasks.json
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS and Windows metadata
+.DS_Store
+._*
+Thumbs.db
+Desktop.ini
+
+# Local environment files
+.env
+.env.*
+!.env.example
