@@ -10,19 +10,22 @@
 
 static inline char rankFromAverage(float average)
 {
-    if (average >= 8.5f) return 'A';
-    if (average >= 7.0f) return 'B';
-    if (average >= 5.0f) return 'C';
+    if (average >= 8.5f)
+        return 'A';
+    if (average >= 7.0f)
+        return 'B';
+    if (average >= 5.0f)
+        return 'C';
     return 'F';
 }
 
-static bool isValidStudent(const Student& s)
+static bool isValidStudent(const Student &s)
 {
     if (s.id == 0 || s.name[0] == '\0' ||
         std::memchr(s.name, '\0', MAX_NAME_LEN) == nullptr)
         return false;
 
-    for (const float* score = s.scores; score != s.scores + NUM_SUBJECTS; ++score)
+    for (const float *score = s.scores; score != s.scores + NUM_SUBJECTS; ++score)
     {
         if (!std::isfinite(*score) || *score < 0.0f || *score > 10.0f)
             return false;
@@ -200,8 +203,7 @@ float calcAverage(const float *scores, int n)
 
     float total = 0;
 
-    for (const float* score = scores; score != scores + n; ++score)
-    {
+    for(const float* score = scores; score != scores+ n; ++score ){
         total += *score;
     }
 
@@ -213,9 +215,54 @@ static bool compareAverage(const Student *a, const Student *b)
     return a->average > b->average;
 }
 
-static bool compareName(const Student *a, const Student *b)
+// Split a name into surname, middle name and given name.
+// Assume words are separated by one space, with no spaces at either end.
+static void splitName(char* name, const char*& surname,
+                      const char*& middle, const char*& given)
 {
-    return std::strcmp(a->name, b->name) < 0;
+    surname = "";
+    middle = "";
+    given = name;
+
+    char* lastSpace = std::strrchr(name, ' ');
+    if (lastSpace == nullptr)
+        return; // Only one word
+
+    *lastSpace = '\0';
+    given = lastSpace + 1;
+    surname = name;
+
+    char* firstSpace = std::strchr(name, ' ');
+    if (firstSpace != nullptr)
+    {
+        *firstSpace = '\0';
+        middle = firstSpace + 1;
+    }
+}
+
+static bool compareName(const Student* a, const Student* b)
+{
+    char nameA[MAX_NAME_LEN];
+    char nameB[MAX_NAME_LEN];
+
+    std::strcpy(nameA, a->name);
+    std::strcpy(nameB, b->name);
+
+    const char *surnameA, *middleA, *givenA;
+    const char *surnameB, *middleB, *givenB;
+
+    splitName(nameA, surnameA, middleA, givenA);
+    splitName(nameB, surnameB, middleB, givenB);
+
+    int result = std::strcmp(givenA, givenB);
+    if (result != 0)
+        return result < 0;
+
+    result = std::strcmp(middleA, middleB);
+    if (result != 0)
+        return result < 0;
+
+    return std::strcmp(surnameA, surnameB) < 0;
 }
 
 void sortView(const Student **view, int count, SortKey key)
@@ -236,7 +283,7 @@ void sortView(const Student **view, int count, SortKey key)
     }
 }
 
-void printStatistics(const Student* arr, int count)
+void printStatistics(const Student *arr, int count)
 {
     TRACE("printStatistics");
     if (arr == nullptr || count <= 0)
@@ -249,17 +296,27 @@ void printStatistics(const Student* arr, int count)
     float lowest = arr[0].average;
     float highest = arr[0].average;
     int ranks[4] = {}; // A, B, C, F
-    for (const Student* student = arr; student != arr + count; ++student)
+    for (const Student *student = arr; student != arr + count; ++student)
     {
         total += student->average;
-        if (student->average < lowest) lowest = student->average;
-        if (student->average > highest) highest = student->average;
+        if (student->average < lowest)
+            lowest = student->average;
+        if (student->average > highest)
+            highest = student->average;
         switch (rankFromAverage(student->average))
         {
-        case 'A': ++ranks[0]; break;
-        case 'B': ++ranks[1]; break;
-        case 'C': ++ranks[2]; break;
-        default: ++ranks[3]; break;
+        case 'A':
+            ++ranks[0];
+            break;
+        case 'B':
+            ++ranks[1];
+            break;
+        case 'C':
+            ++ranks[2];
+            break;
+        default:
+            ++ranks[3];
+            break;
         }
     }
 
@@ -271,7 +328,7 @@ void printStatistics(const Student* arr, int count)
               << ", C: " << ranks[2] << ", F: " << ranks[3] << std::endl;
 }
 
-bool printSortedStudents(const Student* arr, int count, SortKey key)
+bool printSortedStudents(const Student *arr, int count, SortKey key)
 {
     TRACE("printSortedStudents");
     if (count < 0 || (arr == nullptr && count > 0) ||
@@ -283,12 +340,16 @@ bool printSortedStudents(const Student* arr, int count, SortKey key)
         return true;
     }
 
-    const Student** view = new (std::nothrow) const Student*[count];
+    const Student **view = new (std::nothrow) const Student *[count];
     if (view == nullptr)
+    {
         return false;
-    for (int i = 0; i < count; ++i)
-        view[i] = &arr[i];
+    }
 
+    for (int i = 0; i < count; ++i)
+    {
+        view[i] = &arr[i];
+    }
     sortView(view, count, key);
     for (int i = 0; i < count; ++i)
         printStudent(*view[i]);
