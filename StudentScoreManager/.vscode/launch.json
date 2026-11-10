@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug application",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/student_manager",
+            "args": [
+                "students.csv"
+            ],
+            "cwd": "${workspaceFolder}/data",
+            "preLaunchTask": "build",
+            "stopOnEntry": true,
+            "terminal": "integrated"
+        },
+        {
+            "name": "Debug tests",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/test_main",
+            "args": [],
+            "cwd": "${workspaceFolder}/data",
+            "preLaunchTask": "build-test",
+            "stopOnEntry": true,
+            "terminal": "integrated"
+        }
+    ]
+}
