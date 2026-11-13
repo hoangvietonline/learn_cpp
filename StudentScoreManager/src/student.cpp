@@ -346,7 +346,7 @@ bool printSortedStudents(const Student *arr, int count, SortKey key)
         return false;
     }
 
-    for (int i = 0; i < count; ++i)
+    for (size_t i = 0; i < count; ++i)
     {
         view[i] = &arr[i];
     }
