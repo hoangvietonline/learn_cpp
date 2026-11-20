@@ -41,7 +41,6 @@ public:
     virtual Device *clone() const = 0;
 };
 
-std::ostream &operator<<(std::ostream &os,
-                         const Device &device);
+std::ostream &operator<<(std::ostream &os, const Device &device);
 
 #endif

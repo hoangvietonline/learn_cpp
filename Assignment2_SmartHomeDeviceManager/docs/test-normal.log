@@ -1,0 +1,34 @@
+./bin/normal/test_main
+
+[RUN] TC-01: Three device types, status and operators
+[PASS] TC-01: Three device types, status and operators
+
+[RUN] TC-02: Turn ON, total power 813 W
+[PASS] TC-02: Turn ON, total power 813 W
+
+[RUN] TC-03: Recording, total power 816 W
+[PASS] TC-03: Recording, total power 816 W
+
+[RUN] TC-04: Invalid values, boundaries and settings
+[PASS] TC-04: Invalid values, boundaries and settings
+
+[RUN] TC-05: Deep copy constructor and assignment
+[PASS] TC-05: Deep copy constructor and assignment
+
+[RUN] TC-06: Destroy copy, original remains usable
+[PASS] TC-06: Destroy copy, original remains usable
+
+[RUN] TC-07: Self-assignment
+[PASS] TC-07: Self-assignment
+
+[RUN] TC-08: Remove unknown and existing IDs
+[PASS] TC-08: Remove unknown and existing IDs
+
+[RUN] TC-09: Grow from capacity 2 to ten devices
+[PASS] TC-09: Grow from capacity 2 to ten devices
+
+[RUN] TC-10: Cleanup, clone and virtual destructor
+[PASS] TC-10: Cleanup, clone and virtual destructor
+
+Result: 10 passed, 0 failed.
+Live devices at exit: 0
