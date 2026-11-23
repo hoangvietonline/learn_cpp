@@ -1,0 +1,6 @@
+id,type,group,count,min,max,average,moving_average,alarms
+SPD_01,SPEED,SPEED,1,64.00,64.00,64.00,64.00,0
+TEMP_01,TEMP,TEMP,1,36.50,36.50,36.50,36.50,0
+VOLT_01,VOLT,VOLT,1,12.10,12.10,12.10,12.10,0
+total,valid,invalid
+5,3,2
